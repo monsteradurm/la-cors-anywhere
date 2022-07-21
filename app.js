@@ -46,13 +46,28 @@ const proxy = corsAnywhere.createServer({
       }
 });
 
+proxy.on('error', function(e) {
+    console.log("ERROR -- proxy -- ", e);
+});
+
+proxy.on('request', function(req, res) {
+    console.log("REQUEST -- proxy -- ", req.url);
+});
+
+proxy.on('res', function(req, res) {
+    console.log("RESPONSE -- proxy -- ", res);
+});
+
 const onRequest = (req, res) => {
+    console.log("START", req.url);
     req.url = '/https:/' + req.url.replace('/la-cors-anywhere/', '/');
     if (req.url.indexOf('synsketch.com')) {
         req.headers['Authorization'] = 'apikey acranchliquidanimationcom:b1bb92aa73acc60d25721172ba0f64db2654e5ca';
     }
     console.log(req.url)
     proxy.emit('request', req, res);
+
+    console.log("END")
 }
 app.get('/la-cors-anywhere/*', onRequest);
 app.post('/la-cors-anywhere/*', onRequest);
@@ -63,3 +78,4 @@ app.delete('/la-cors-anywhere/*', onRequest);
 app.listen(port, () => {
     console.log("la-cors-anywhere --> listening at: " + port)
 });
+
