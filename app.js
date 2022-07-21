@@ -18,6 +18,6 @@ const cors_proxy = require('cors-anywhere').createServer({
       // Do not add X-Forwarded-For, etc. headers, because Heroku already adds it.
       //xfwd: false,
     },
-}).listen(port, host, function() {
+}).listen(() => {
     console.log('Running CORS Anywhere on ' + host + ':' + port);
 });
