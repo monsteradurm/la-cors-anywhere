@@ -1,0 +1,23 @@
+{
+  "name": "la-cors-anywhere",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monsteradurm/la-cors-anywhere.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/monsteradurm/la-cors-anywhere/issues"
+  },
+  "homepage": "https://github.com/monsteradurm/la-cors-anywhere#readme",
+  "dependencies": {
+    "cors-anywhere": "^0.4.4",
+    "express": "^4.18.1"
+  }
+}
