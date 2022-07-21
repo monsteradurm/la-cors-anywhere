@@ -1,23 +1,27 @@
 
-
+const express = require('express');
+const corsAnywhere = require('cors-anywhere');
 var host = process.env.HOST || '0.0.0.0';
 var port = process.env.PORT || 8080;
+var app = express();
 
-
-const cors_proxy = require('cors-anywhere').createServer({
+const proxy = corsAnywhere.createServer({
     originWhitelist: [], // Allow all origins
     requireHeader: [],
     removeHeaders: [],
     redirectSameOrigin: true,
-    handleInitialRequest: (req, res, url) => {
-        req.url = '/https:/' + req.url;
-        console.log("HERE", req.url)
-        return true;
-    },
     httpProxyOptions: {
       // Do not add X-Forwarded-For, etc. headers, because Heroku already adds it.
       //xfwd: false,
     },
-}).listen(() => {
-    console.log('Running CORS Anywhere on ' + host + ':' + port);
+});
+
+app.all('/', (req, res) => {
+    req.url = req.url.replace('/cors/', '/');
+    req.url = '/https:/' + req.url;
+    proxy.emit('request', req, res);
+});
+
+app.listen(port, () => {
+    console.log("la-cors-anywhere --> listening at: " + port)
 });
