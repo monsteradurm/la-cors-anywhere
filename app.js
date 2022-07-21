@@ -36,7 +36,7 @@ const onRequest = (req, res) => {
     if (req.url.indexOf('synsketch.com')) {
         req.headers['Authorization'] = 'apikey acranchliquidanimationcom:b1bb92aa73acc60d25721172ba0f64db2654e5ca';
     }
-    
+    console.log(req.url)
     proxy.emit('request', req, res);
 }
 app.get('/la-cors-anywhere/*', onRequest);
