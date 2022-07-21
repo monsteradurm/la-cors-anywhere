@@ -16,17 +16,17 @@ const proxy = corsAnywhere.createServer({
     },
 });
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    req.url = '/https:/' + req.url;
-    next();
-});
+const onRequest = (req, res) => {
+    req.url = '/https:/' + req.url.replace('/la-cors-anywhere/', '/');
 
-app.all('*', (req, res) => {
     console.log(req.url)
-    //req.url = '/https:/' + req.url;
     proxy.emit('request', req, res);
-});
+}
+app.get('/la-cors-anywhere/*', onRequest);
+app.post('/la-cors-anywhere/*', onRequest);
+app.put('/la-cors-anywhere/*', onRequest);
+app.patch('/la-cors-anywhere/*', onRequest);
+app.delete('/la-cors-anywhere/*', onRequest);
 
 app.listen(port, () => {
     console.log("la-cors-anywhere --> listening at: " + port)
