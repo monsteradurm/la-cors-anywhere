@@ -16,9 +16,15 @@ const proxy = corsAnywhere.createServer({
     },
 });
 
-app.all('/', (req, res) => {
-    req.url = req.url.replace('/cors/', '/');
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
     req.url = '/https:/' + req.url;
+    next();
+});
+
+app.all('*', (req, res) => {
+    console.log(req.url)
+    //req.url = '/https:/' + req.url;
     proxy.emit('request', req, res);
 });
 
