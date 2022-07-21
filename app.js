@@ -23,12 +23,15 @@ app.use((req, res, next) => {
 const proxy = corsAnywhere.createServer({
     originWhitelist: [], // Allow all origins
     requireHeader: [],
-    removeHeaders: [],
-    redirectSameOrigin: true,
-    httpProxyOptions: {
-      // Do not add X-Forwarded-For, etc. headers, because Heroku already adds it.
-      //xfwd: false,
-    },
+    removeHeaders: [
+        'cookie',
+        'cookie2',
+        'x-request-start'
+      ],
+      redirectSameOrigin: true,
+      httpProxyOptions: {
+        xfwd: false
+      }
 });
 
 const onRequest = (req, res) => {
