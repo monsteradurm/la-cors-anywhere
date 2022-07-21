@@ -23,14 +23,15 @@ app.use(cors());
 app.disable('x-powered-by');
 app.disable('x-xss-protection');
 app.disable('x-content-type-options');
+/*
 app.use((req, res, next) => {
+    
     res.header('Access-Control-Allow-Origin', '*');
-    console.log(req.headers);
     const csp = "default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline';"
     res.set("Content-Security-Policy", csp);
     next();
   });
-
+*/
 const proxy = corsAnywhere.createServer({
     originWhitelist: [], // Allow all origins
     requireHeader: [],
@@ -41,7 +42,7 @@ const proxy = corsAnywhere.createServer({
       ],
       redirectSameOrigin: true,
       httpProxyOptions: {
-        xfwd: false
+        xfwd: true
       }
 });
 
