@@ -2,6 +2,7 @@
 const express = require('express');
 const corsAnywhere = require('cors-anywhere');
 const cors = require('cors');
+const fs = require('fs');
 
 var host = process.env.HOST || '0.0.0.0';
 var port = process.env.PORT || 8080;
