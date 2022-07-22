@@ -1,9 +1,1 @@
 la-cors-anywhere --> listening at: 8080
-START
-/https://syncsketch.com/api/v1/item/11406327/
-REQUEST -- proxy -- 
-END
-START
-/https://syncsketch.com/api/v1/item/11406327/
-REQUEST -- proxy -- 
-END

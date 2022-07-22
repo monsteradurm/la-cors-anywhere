@@ -75,7 +75,7 @@ app.put('/la-cors-anywhere/*', onRequest);
 app.patch('/la-cors-anywhere/*', onRequest);
 app.delete('/la-cors-anywhere/*', onRequest);
 
-app.listen(() => {
+app.listen(8080, () => {
     console.log("la-cors-anywhere --> listening at: " + port)
 });
 
