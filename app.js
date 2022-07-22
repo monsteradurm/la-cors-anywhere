@@ -66,7 +66,7 @@ const onRequest = (req, res) => {
     }
     console.log(req.url)
     proxy.emit('request', req, res);
-
+    console.log(req.body);
     console.log("END")
 }
 app.get('/la-cors-anywhere/*', onRequest);
